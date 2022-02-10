@@ -13,7 +13,9 @@ jobs:
         run: docker build .
         working-directory: .docker
       - name: Test images
-        run: docker-compose up -d
+        run: |
+          cp .env.example .env
+          docker-compose up -d
       - name: Push images to Docker
         if: (github.event_name == 'push' || github.event_name == 'schedule') && github.ref == 'refs/heads/main'
         run: |
