@@ -1,8 +1,8 @@
 version: '3.8'
 services:
-    zydhan-blog:
-        container_name: zydhan-blog
-        build: .docker
+    laravel-docker-image:
+        container_name: laravel-docker-image
+        image: zydhanlinnar11/laravel-docker-image
         volumes:
             - ./src:/var/www/html
         env_file: .env
