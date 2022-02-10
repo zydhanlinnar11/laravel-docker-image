@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+    zydhan-blog:
+        container_name: zydhan-blog
+        build: .docker
+        volumes:
+            - ./src:/var/www/html
+        env_file: .env
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+        networks:
+            - nginx-proxy-network
+
+networks:
+    nginx-proxy-network:
+        external: true
