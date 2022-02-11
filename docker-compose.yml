@@ -10,6 +10,8 @@ services:
             - "host.docker.internal:host-gateway"
         networks:
             - nginx-proxy-network
+        ports:
+            - "8080:80"
 
 networks:
     nginx-proxy-network:
