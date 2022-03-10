@@ -23,6 +23,6 @@ RUN docker-php-ext-install bcmath
 # Additional php configuration
 COPY config/php-jakarta-timezone.ini /usr/local/etc/php/conf.d/php-jakarta-timezone.ini
 
-EXPOSE 80
+EXPOSE 8080
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor.d/supervisord.ini"]
