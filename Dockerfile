@@ -21,7 +21,7 @@ COPY config/laravel.conf /etc/nginx/http.d/default.conf
 RUN docker-php-ext-install bcmath
 
 # Install Xdebug
-RUN apk add autoconf
+RUN apk --add --no-cache autoconf
 RUN pecl install xdebug
 RUN docker-php-ext-enable --ini-name 30-xdebug.ini xdebug
 
