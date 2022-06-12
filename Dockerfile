@@ -20,8 +20,13 @@ COPY config/laravel.conf /etc/nginx/http.d/default.conf
 # Configure php extensions
 RUN docker-php-ext-install bcmath
 
+# Install Xdebug
+RUN pecl install xdebug
+RUN docker-php-ext-enable --ini-name 30-xdebug.ini xdebug
+
 # Additional php configuration
 COPY config/php-jakarta-timezone.ini /usr/local/etc/php/conf.d/php-jakarta-timezone.ini
+COPY config/custom-xdebug.ini /usr/local/etc/php/conf.d/custom-xdebug.ini
 
 EXPOSE 8080
 
