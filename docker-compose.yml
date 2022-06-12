@@ -1,16 +1,18 @@
-version: '3.8'
 services:
-    laravel-docker-image:
-        container_name: laravel-docker-image
-        image: zydhanlinnar11/laravel-docker-image
-        volumes:
-            - ./src:/var/www/html
-        env_file: .env
-        extra_hosts:
-            - "host.docker.internal:host-gateway"
-        networks:
-            - nginx-proxy-network
+  laravel-docker-image:
+    container_name: laravel-docker-image
+    image: zydhanlinnar11/laravel-docker-image
+    volumes:
+      - ./src:/var/www/html
+    env_file: .env
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    networks:
+      - nginx-proxy-network
 
 networks:
-    nginx-proxy-network:
-        external: true
+  nginx-proxy-network:
+    external: true
