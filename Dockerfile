@@ -1,4 +1,4 @@
-FROM php:8.1.7-fpm-alpine
+FROM php:fpm-alpine
 
 # Change timezone
 RUN echo "Asia/Jakarta" > /etc/timezone
