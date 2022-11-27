@@ -1,0 +1,24 @@
+FROM php:fpm-alpine
+
+# Install composer
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
+# Change timezone
+RUN echo "Asia/Jakarta" > /etc/timezone && \
+    # Configure supervisor
+    apk add --no-cache supervisor && \
+    mkdir -p /etc/supervisor.d/ && \
+    mkdir -p /var/log/supervisord/ && \
+    # Configure nginx
+    apk add --no-cache nginx && \
+    mkdir -p /etc/nginx && \
+    # Configure php extensions
+    docker-php-ext-install bcmath && \
+    apk add --no-cache git
+
+# Copy configurations
+COPY config/supervisord.ini /etc/supervisor.d/supervisord.ini
+COPY config/laravel.conf /etc/nginx/http.d/default.conf
+COPY config/php-jakarta-timezone.ini /usr/local/etc/php/conf.d/php-jakarta-timezone.ini
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor.d/supervisord.ini"]

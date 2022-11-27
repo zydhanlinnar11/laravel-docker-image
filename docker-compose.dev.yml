@@ -1,15 +1,13 @@
 services:
   laravel-docker-image:
     container_name: laravel-docker-image
-    image: zydhanlinnar11/laravel-docker-image
+    image: zydhanlinnar11/laravel-docker-image:latest
     volumes:
       - ./src:/var/www/html
-    env_file: .env
     dns:
       - 1.1.1.1
       - 1.0.0.1
-    extra_hosts:
-      - 'host.docker.internal:host-gateway'
+    env_file: .env
     networks:
       - nginx-proxy-network
 
