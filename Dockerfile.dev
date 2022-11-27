@@ -4,17 +4,14 @@ FROM php:fpm-alpine
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 # Change timezone
-RUN echo "Asia/Jakarta" > /etc/timezone && \
-    # Configure supervisor
-    apk add --no-cache supervisor && \
-    mkdir -p /etc/supervisor.d/ && \
-    mkdir -p /var/log/supervisord/ && \
-    # Configure nginx
-    apk add --no-cache nginx && \
-    mkdir -p /etc/nginx && \
-    # Configure php extensions
-    docker-php-ext-install bcmath && \
-    apk add --no-cache git
+RUN echo "Asia/Jakarta" > /etc/timezone \
+    && apk add --no-cache supervisor \
+    && mkdir -p /etc/supervisor.d/ \
+    && mkdir -p /var/log/supervisord/ \
+    && apk add --no-cache nginx \
+    && mkdir -p /etc/nginx \
+    && docker-php-ext-install bcmath \
+    && apk add --no-cache git
 
 # Copy configurations
 COPY config/supervisord.ini /etc/supervisor.d/supervisord.ini
