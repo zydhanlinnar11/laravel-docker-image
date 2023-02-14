@@ -1,7 +1,7 @@
 services:
-  laravel-docker-image-prod:
-    container_name: laravel-docker-image-prod
-    image: zydhanlinnar11/laravel-docker-image-prod:latest
+  laravel-prod:
+    container_name: laravel-prod
+    image: zydhanlinnar11/laravel-prod:latest
     volumes:
       - ./src:/var/www/html
     env_file: .env.prod

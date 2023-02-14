@@ -1,13 +1,13 @@
 services:
-  laravel-docker-image:
-    container_name: laravel-docker-image
-    image: zydhanlinnar11/laravel-docker-image:main
+  laravel-dev:
+    container_name: laravel-dev
+    image: zydhanlinnar11/laravel-dev:main
     volumes:
       - ./src:/var/www/html
     dns:
       - 1.1.1.1
       - 1.0.0.1
-    env_file: .env
+    env_file: .env.dev
     networks:
       - nginx-proxy-network
 
