@@ -5,21 +5,15 @@ COPY --from=composer:2.5.3 /usr/bin/composer /usr/bin/composer
 
 # Change timezone
 RUN echo "Asia/Jakarta" > /etc/timezone \
-    && apk add --no-cache supervisor \
-    && mkdir -p /etc/supervisor.d/ \
-    && mkdir -p /var/log/supervisord/ \
-    && apk add --no-cache nginx \
-    && mkdir -p /etc/nginx \
     && docker-php-ext-install bcmath \
-    && apk add --no-cache git $PHPIZE_DEPS \
-    && pecl install xdebug-3.1.5 \
-    && docker-php-ext-enable xdebug
+    && apk add --no-cache linux-headers $PHPIZE_DEPS \
+    && pecl install xdebug-3.2.0 \
+    && docker-php-ext-enable xdebug \
+    && apk del --purge --no-cache $PHPIZE_DEPS
 
 # Copy configurations
-COPY config/supervisord.ini /etc/supervisor.d/supervisord.ini
-COPY config/laravel.conf /etc/nginx/http.d/default.conf
 COPY config/php-jakarta-timezone.ini /usr/local/etc/php/conf.d/php-jakarta-timezone.ini
 COPY config/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 COPY config/error_reporting.ini /usr/local/etc/php/conf.d/error_reporting.ini
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor.d/supervisord.ini"]
+CMD ["php", "artisan", "serve", "--port=80", "--host=0.0.0.0"]
