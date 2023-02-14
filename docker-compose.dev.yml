@@ -1,9 +1,7 @@
 services:
   laravel-docker-image:
     container_name: laravel-docker-image
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
+    image: zydhanlinnar11/laravel-docker-image:main
     volumes:
       - ./src:/var/www/html
     dns:
