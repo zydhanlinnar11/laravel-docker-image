@@ -16,7 +16,7 @@ RUN echo "Asia/Jakarta" > /etc/timezone \
     && apk update \
     && apk add --no-cache autoconf zlib-dev g++ gcc linux-headers make zlib grpc \
     && pecl install grpc-1.49.0 protobuf \
-    && apk del -f .build-dependencies \
+    && apk del --purge --no-cache $PHPIZE_DEPS autoconf zlib-dev g++ gcc linux-headers make zlib \
     && echo "extension=protobuf.so" > /usr/local/etc/php/conf.d/docker-php-ext-protobuf.ini \
     && echo "extension=grpc.so" > /usr/local/etc/php/conf.d/docker-php-ext-grpc.ini
 
