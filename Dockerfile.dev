@@ -22,7 +22,10 @@ RUN echo "Asia/Jakarta" > /etc/timezone \
     && pecl install grpc-1.49.0 protobuf \
     && apk del --purge --no-cache $PHPIZE_DEPS autoconf zlib-dev g++ gcc linux-headers make zlib \
     && echo "extension=protobuf.so" > /usr/local/etc/php/conf.d/docker-php-ext-protobuf.ini \
-    && echo "extension=grpc.so" > /usr/local/etc/php/conf.d/docker-php-ext-grpc.ini
+    && echo "extension=grpc.so" > /usr/local/etc/php/conf.d/docker-php-ext-grpc.ini \
+    && apk add --no-cache freetype-dev libpng-dev jpeg-dev libjpeg-turbo-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd
 
 # Copy configurations
 COPY config/supervisord.ini /etc/supervisor.d/supervisord.ini
