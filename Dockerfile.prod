@@ -1,4 +1,4 @@
-FROM composer:2.5.3 as vendor
+FROM composer:2.5.4 as vendor
 
 # Install composer packages
 WORKDIR /app
@@ -6,7 +6,7 @@ COPY src/ .
 RUN mkdir -p bootstrap/cache \
     && composer install --optimize-autoloader --no-dev
 
-FROM php:8.2.2-fpm-alpine3.17
+FROM php:8.2.3-fpm-alpine3.17
 # Setup supervisor, nginx, php extensions, config, user, and missing folders
 RUN echo "Asia/Jakarta" > /etc/timezone \
     # Configure supervisor

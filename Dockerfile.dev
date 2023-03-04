@@ -1,10 +1,10 @@
-FROM php:8.2.2-fpm-alpine3.17
+FROM php:8.2.3-fpm-alpine3.17
 
 LABEL mantainer="zydhanlinnar11@gmail.com"
 LABEL description="PHP alpine - docker container with dependencies and gRPC extension"
 
 # Install composer
-COPY --from=composer:2.5.3 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.5.4 /usr/bin/composer /usr/bin/composer
 
 # Change timezone
 RUN echo "Asia/Jakarta" > /etc/timezone \
